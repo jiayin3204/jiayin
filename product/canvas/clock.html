@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>clock</title>
+	<link rel="shortcut icon" href="./clock.ico" type="image/x-icon">
+	<style>
+		canvas {
+			/* border: 1px solid red; */
+			background:url('640.jpg') no-repeat center;
+			background-size: 45%;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="400"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementsByTagName("canvas")[0];
+		var tsx = canvas.getContext("2d");
+		function ator(angle){
+			return angle*Math.PI/180;
+		}
+
+	
+	function clock(){
+		tsx.clearRect(0, 0, 600, 400);
+
+		// 钟表外圈
+		// tsx.beginPath();
+		// tsx.arc(300, 200, 110, 0, Math.PI*2);
+		// tsx.strokeStyle = "yellow";
+		// tsx.stroke();
+		
+		
+		var date = new Date();
+		var s = date.getSeconds();
+		var h = date.getHours()-12;
+		var m = date.getMinutes();
+		tsx.beginPath();
+
+		// 秒针
+		tsx.beginPath();
+		var ox = 300+100*Math.cos(ator(s*6-90));
+		var oy = 200+100*Math.sin(ator(s*6-90));
+		// 秒针的的针样式
+		tsx.moveTo(300, 200);
+		tsx.lineTo(ox, oy);
+		tsx.lineWidth = "2";
+
+		tsx.strokeStyle = "#000";
+		tsx.stroke();
+
+		// 秒针的小圆点
+		// tsx.beginPath(); 
+		// tsx.arc(ox, oy, 6, 0, Math.PI*2);
+		// tsx.fillStyle = "red";
+		// tsx.fill();
+		
+
+
+		// 分针
+		tsx.beginPath();
+		tsx.moveTo(300, 200);
+		var ox1 = 300+90*Math.cos(ator(m*6-90));
+		var oy1 = 200+90*Math.sin(ator(m*6-90));
+		tsx.lineTo(ox1, oy1);
+		tsx.lineWidth = "3";
+		tsx.stroke();
+		tsx.strokeStyle = "#000";
+
+		// tsx.beginPath(); 
+		// tsx.arc(ox1, oy1, 6, 0, Math.PI*2);
+		// tsx.fillStyle = "blue";
+		// tsx.fill();
+
+		// 时针
+		tsx.beginPath();
+		tsx.moveTo(300, 200);
+		var ox2 = 300+80*Math.cos(ator(h*30-90));
+		var oy2 = 200+80*Math.sin(ator(h*30-90));
+		tsx.lineTo(ox2, oy2);
+		tsx.lineWidth = "6";
+		tsx.strokeStyle = "#000";
+		tsx.stroke();
+
+		// tsx.beginPath(); 
+		// tsx.arc(ox2, oy2, 8, 0, Math.PI*2);
+		// tsx.fillStyle = "green";
+		// tsx.fill();
+		
+		// 钟表中间的小圆点
+		tsx.beginPath();
+		tsx.arc(300, 200, 8, 0, Math.PI*2);
+		tsx.fillStyle = "#000";
+		tsx.fill();
+
+		// 中间的小红点
+		tsx.beginPath();
+		tsx.arc(300, 200, 4, 0, Math.PI*2);
+		tsx.fillStyle = "red";
+		tsx.fill();
+	}
+		setInterval(clock, 1000);
+		
+		
+	</script>
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>
